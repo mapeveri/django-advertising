@@ -1,0 +1,7 @@
+*.pyc
+*.mo
+__pycache__
+migrations
+/staticfiles/
+/media/
+/static/node_modules
