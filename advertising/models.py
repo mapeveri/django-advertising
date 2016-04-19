@@ -1,8 +1,14 @@
+import os
+
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
 from .validators import valid_extension
 
+
+def generate_path(instance, filename):
+	return os.path.join("advertising", filename)
+    
 
 @python_2_unicode_compatible
 class Advertising(models.Model):
