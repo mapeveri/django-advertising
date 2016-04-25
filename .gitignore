@@ -2,6 +2,7 @@
 *.mo
 __pycache__
 migrations
+example/static/
 example/staticfiles/
 /example/media/
 /example/static/node_modules

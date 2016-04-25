@@ -2,9 +2,10 @@
 <head>
 	<title>Example</title>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	{% load static %}
+	{% load image %}
 </head>
 <body>
-	{% load image %}
 	<div class="container">
     <div class="navbar navbar-default navbar-static">
         <div class="navbar-header" align="centre"><a class="navbar-brand" href="#" contenteditable="false">Example</a>
@@ -15,10 +16,13 @@
 
         </ul>
     </div> 
-    {% get_images_advertising 'jumbotron' width=300 height=300 %}
+    <div class="jumbotron">
+        {% get_images_advertising width=300 height=300 %}
+    </div>
 	
 	<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="{% static 'advertising/js/events.js' %}"></script>
 		
 <body>              
 </html>
