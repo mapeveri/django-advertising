@@ -2,6 +2,7 @@ import sys
 
 from django import template
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 
 from ..models import Advertising
@@ -18,10 +19,10 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
     @param height: height img
     """
 
-    if 'total' in kwargs:
-        total = kwargs['total']
+    if 'campaign' in kwargs:
+        campaign = kwargs['campaign']
     else:
-        total = None
+        campaign = None
 
     if sys.version_info >= (3, 0):
         if not isinstance(width, str):
@@ -37,10 +38,16 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
         if not isinstance(height, basestring):
             height = str(height)
 
-    if total is None:
-        data = Advertising.objects.all()
+    if campaign is None:
+        try:
+            data = Advertising.objects.get(id=1)
+        except Advertising.DoesNotExist:
+            data = None
     else:
-        data = Advertising.objects.all[total]
+        try:
+            data = Advertising.objects.get(id=campaign)
+        except Advertising.DoesNotExist:
+            data = None
 
     html = ""
 
@@ -59,16 +66,17 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
         </style>
     """
 
-    html += '<div id="images_advertising" class="parent_advertising">'
-    counter = 0
-    for image in data:
-        html += '<div id="image_container_advertising_' + str(counter) + '"'
-        html += '<a href="' + image.url + '">'
-        html += '<img src="' + settings.MEDIA_URL + str(image.image) + '"'
-        html += 'class="img_advertising"'
-        html += ' id="img_advertising_' + str(counter) + '"></a>'
+    if hasattr(data, 'images'):
+        html += '<div id="images_advertising" class="parent_advertising">'
+        counter = 0
+        for image in data.images.all():
+            html += '<div id="image_container_advertising_' + str(counter) + '"'
+            html += '<a href="' + image.url + '">'
+            html += '<img src="' + settings.MEDIA_URL + str(image.photo) + '"'
+            html += 'class="img_advertising"'
+            html += ' id="img_advertising_' + str(counter) + '"></a>'
+            html += '</div>'
+            counter = counter + 1
         html += '</div>'
-        counter = counter + 1
-    html += '</div>'
 
     return mark_safe(html)
