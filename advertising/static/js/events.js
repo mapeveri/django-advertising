@@ -4,10 +4,24 @@
     var counter = document.querySelector("#images_advertising").childNodes.length - 1;
     var counterTotal = counter;
     var container, image;
+
+    //This variable to load template tag
+    var secondsIntervalAdvertising;
+    if(window.TimeOutAdvertising)
+    {
+        secondsIntervalAdvertising = window.TimeOutAdvertising;
+    }else
+    {
+        secondsIntervalAdvertising = 3000;
+    }
+
     setInterval(function()
     {
         //Hide image index counter
-        toogle(counter, false);
+        if (counter > -1)
+        {
+            toogle(counter, false);
+        }
 
         //If the final, again show images
         if(counter <= 0)
@@ -21,7 +35,7 @@
         {
             counter--;
         }
-    }, 3000);
+    }, secondsIntervalAdvertising);
 
     /**
      * @name: toogle

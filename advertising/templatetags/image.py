@@ -51,6 +51,13 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
 
     html = ""
 
+    if data.timeout:
+        timeout = data.timeout * 1000
+        html += """
+            <script>
+            window.TimeOutAdvertising = """ + str(timeout) + """
+            </script>"""
+
     html += """
         <style>
         .parent_advertising {
