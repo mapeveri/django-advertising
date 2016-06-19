@@ -53,10 +53,11 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
 
     if data:
         if data.timeout:
+            id_adv = data.id_advertising.strip()
             timeout = data.timeout * 1000
             html += """
                 <script>
-                window.TimeOutAdvertising = """ + str(timeout) + """
+                window.TimeOutAdvertising_""" + id_adv + """ = """ + str(timeout) + """
                 </script>"""
 
         html += """
@@ -75,17 +76,28 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
         """
 
         if hasattr(data, 'images'):
-            html += '<div id="images_advertising" class="parent_advertising">'
+            html += '<div id="images_advertising_' + id_adv + '"'
+            html += ' class="parent_advertising">'
             counter = 0
             for image in data.images.all():
                 html += '<div id="image_container_advertising_' + str(counter)
-                html += '" <a href="' + image.url + '">'
+                html += '_' + id_adv + '"'
+                html += ' <a href="' + image.url + '">'
                 html += '<img src="' + settings.MEDIA_URL + str(image.photo)
                 html += '" class="img_advertising"'
-                html += ' id="img_advertising_' + str(counter) + '"></a>'
+                html += ' id="img_advertising_' + str(counter) + '_' + id_adv
+                html += '"></a>'
                 html += '</div>'
                 counter = counter + 1
             html += '</div>'
+
+            html += """
+            <script>
+            document.addEventListener("DOMContentLoaded", function(event) { 
+                advertisingModule.initialize('""" + id_adv + """');
+            });
+            </script>
+            """
     else:
         html = ""
 
