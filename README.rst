@@ -24,7 +24,8 @@ Quick start
 
 2. Apply migrations::
 	
-	python manage.py migrate
+	python manage.py makemigrations advertising
+	python manage.py migrate advertising
 
 3. Add this script in your file .html to use::
 
