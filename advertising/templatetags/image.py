@@ -52,39 +52,28 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
     html = ""
 
     if data:
+        id_adv = data.id_advertising.strip()
         if data.timeout:
-            id_adv = data.id_advertising.strip()
             timeout = data.timeout * 1000
             html += """
                 <script>
                 window.TimeOutAdvertising_""" + id_adv + """ = """ + str(timeout) + """
                 </script>"""
 
-        html += """
-            <style>
-            .parent_advertising {
-            position: relative;
-            width: """ + width + """px;
-            height: """ + height + """px;
-            }
-            .img_advertising {
-            position: absolute;
-            width: """ + width + """px;
-            height: """ + height + """px;
-            }
-            </style>
-        """
-
+        # Style css
+        class_parent = "position: relative; width: " + width + "px; height: " + height + "px;"
+        class_img = "position: absolute; width: " + width + "px; height: " + height + "px;"
+        
         if hasattr(data, 'images'):
             html += '<div id="images_advertising_' + id_adv + '"'
-            html += ' class="parent_advertising">'
+            html += ' style="' + class_parent + '">'
             counter = 0
             for image in data.images.all():
                 html += '<div id="image_container_advertising_' + str(counter)
                 html += '_' + id_adv + '"'
                 html += ' <a href="' + image.url + '">'
                 html += '<img src="' + settings.MEDIA_URL + str(image.photo)
-                html += '" class="img_advertising"'
+                html += '" style="' + class_img + '"'
                 html += ' id="img_advertising_' + str(counter) + '_' + id_adv
                 html += '"></a>'
                 html += '</div>'
