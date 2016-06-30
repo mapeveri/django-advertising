@@ -71,7 +71,7 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
             for image in data.images.all():
                 html += '<div id="image_container_advertising_' + str(counter)
                 html += '_' + id_adv + '"'
-                html += ' <a href="' + image.url + '">'
+                html += '> <a target="_blank" href="' + image.url + '">'
                 html += '<img src="' + settings.MEDIA_URL + str(image.photo)
                 html += '" style="' + class_img + '"'
                 html += ' id="img_advertising_' + str(counter) + '_' + id_adv
