@@ -11,25 +11,12 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_images_advertising(width=100, height=100, *args, **kwargs):
+def get_images_advertising(height=100, campaign="", *args, **kwargs):
     """
     @method: get_images_advertising
     @descrip: Method thar return images advertising
-    @param width: width img
     @param height: height img
     """
-
-    if 'campaign' in kwargs:
-        campaign = kwargs['campaign']
-    else:
-        campaign = None
-
-    if sys.version_info >= (3, 0):
-        if not isinstance(width, str):
-            width = str(width)
-    else:
-        if not isinstance(width, basestring):
-            width = str(width)
 
     if sys.version_info >= (3, 0):
         if not isinstance(height, str):
@@ -61,11 +48,11 @@ def get_images_advertising(width=100, height=100, *args, **kwargs):
                 </script>"""
 
         # Style css
-        class_parent = "position: relative; width: " + width + "px; height: " + height + "px;"
-        class_img = "position: absolute; width: " + width + "px; height: " + height + "px;"
+        class_parent = "position: relative; min-height: "+height+"px;"
+        class_img = "position: absolute; width: 100%; height: auto;"
         
         if hasattr(data, 'images'):
-            html += '<div id="images_advertising_' + id_adv + '"'
+            html += '<div class="img-advertising" id="images_advertising_' + id_adv + '"'
             html += ' style="' + class_parent + '">'
             counter = 0
             for image in data.images.all():

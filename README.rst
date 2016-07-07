@@ -34,14 +34,19 @@ Quick start
 4. Add this line in your file .html to use::
 	
 	{% load image %}
-	{% get_images_advertising width=300 height=300 campaign='CMP1' %}
+	{% get_images_advertising height=300 campaign='CMP1' %}
 
 
 Parameters
 ----------
 
-1. width and height: Element size.
+1. Height: Min height element size.
 2. Campaign: Id unique Advertising Model. (String)
+
+Responsive
+----------
+
+If you wish to play with media queries, use the **img-advertising** class.
 
 Contribute
 ----------
