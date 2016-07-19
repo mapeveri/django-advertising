@@ -47,7 +47,7 @@ var advertisingModule = (function()
 
     /**
      * @name: toogle
-     * @descrip: Check if is show or hide elements image and container
+     * @descrip: Check if is show or hide element container
      * @param {String} id: id advertising.
      * @param {Integer} counter - id element.
      * @param {Boolena} is_show - if element is show or hide
@@ -55,15 +55,11 @@ var advertisingModule = (function()
     function toogle(id, counter, is_show)
     {
         var container = "#image_container_advertising_" + counter + "_" + id;
-        var image = "#img_advertising_" + counter + "_" + id;
-
         if(is_show)
         {
             displayMe(document.querySelector(container));
-            displayMe(document.querySelector(image));
         }else{
             hideMe(document.querySelector(container));
-            hideMe(document.querySelector(image));
         }
     }
 
@@ -75,7 +71,7 @@ var advertisingModule = (function()
     function displayMe(element)
     {
         element.style.transition = "all .3s";
-        element.style.opacity = "1";
+        element.style.display = "block";
     }
 
     /**
@@ -86,7 +82,7 @@ var advertisingModule = (function()
     function hideMe(element)
     {
         element.style.transition = "all .3s";
-        element.style.opacity = "0";
+        element.style.display = "none";
     }
 
     return {
