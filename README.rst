@@ -1,7 +1,7 @@
 Django-Advertising
 ==================
 
-Django application for show advertising configurable.
+Django application for show advertising configurable. This application allows you to display advertising in a box (one or many images) and set (Time, url, etc.).
 
 Installing
 ----------
