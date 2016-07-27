@@ -48,6 +48,13 @@ Responsive
 
 If you wish to play with media queries, use the **img-advertising** class.
 
+Example 
+-------
+
+It lets do something like that, where a campaign you can add different images and automatically change based on the set time.
+
+.. image:: https://github.com/mapeveri/django-advertising/blob/master/images/example.gif
+
 Contribute
 ----------
 
